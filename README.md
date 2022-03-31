@@ -82,3 +82,26 @@ docker-compose exec db psql --username=azatnv --dbname=azatnv_db
 ```Linux Kernel Module
 docker-compose exec db psql --username=azatnv --dbname=azatnv_db_prod
 ```
+
+### Tables
+## Hero
+- hero_id = Column(Integer, primary_key = True)
+- name = Column(String(20), nullable = False), UniqueConstraint
+- side = Column(String(20), nullable = False)
+- birthday = Column(DateTime(timezone = True), nullable = False)
+## Slogan
+- slogan_id = Column(Integer, primary_key = True)
+- hero_id = Column(Integer, ForeignKey('hero.hero_id', ondelete="CASCADE"))
+- moto_id = Column(Integer, nullable = False)
+- moto = Column(String(200), nullable = False), UniqueConstraint
+## Clash
+- clash_id = Column(Integer, primary_key = True)
+- hero_1_id = Column(Integer, ForeignKey('hero.hero_id', ondelete="set null"))
+- hero_1_slogan_id = Column(Integer, ForeignKey('slogan.slogan_id', ondelete="set null"))
+- hero_2_id = Column(Integer, ForeignKey('hero.hero_id', ondelete="set null"))
+- hero_2_slogan_id = Column(Integer, ForeignKey('slogan.slogan_id', ondelete="set null"))
+- winner = Column(Integer, nullable = False)
+## Story
+- story_id = Column(Integer, primary_key = True)
+- hero_id = Column(Integer, ForeignKey('hero.hero_id', ondelete="CASCADE")), UniqueConstraint
+- story = Column(String(500), nullable = False), UniqueConstraint
