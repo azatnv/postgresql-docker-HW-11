@@ -8,7 +8,7 @@ To deploy - from the root folder:
 ```Linux Kernel Module
 docker-compose up -d --build
 ```
-Database is available http://localhost:5432 <br>
+Database is available on localhost:5432 <br>
 To switch containers off:
 ```Linux Kernel Module
 docker-compose down -v
