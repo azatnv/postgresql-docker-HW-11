@@ -1,0 +1,24 @@
+services:
+  azat:
+    container_name: azat
+    build:
+      context: ./src
+      dockerfile: Dockerfile.prod
+    expose:
+      - 5000
+    env_file:
+      - ./.env.prod
+    depends_on:
+      - db
+  db:
+    container_name: postgres
+    image: postgres:latest
+    ports:
+      - 5432:5432
+    volumes:
+      - postgres_data_prod:/var/lib/postgresql/data/
+    env_file:
+      - ./.env.prod.db
+
+volumes:
+  postgres_data_prod:
